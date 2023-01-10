@@ -1,6 +1,9 @@
 import style from '../styles/Contacto.module.css';
 import { useRef, useState } from 'react';
-import { render } from 'react-dom';
+
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+
+
 
 function ErroresForm(props) {
 
@@ -24,12 +27,15 @@ function ErroresForm(props) {
 }
 
 export default function Contacto() {
-
     let fc = useRef({});
+    const { executeRecaptcha } = useGoogleReCaptcha();
+    //console.log(executeRecaptcha);
 
     const [errores, setErrores] = useState([]);
     const [deshabilitarEnvio, setDeshabilitarEnvio] = useState(false);
     const [enviado, setEnviado] = useState(false);
+
+
 
     async function enviarManejador(e) {
         e.preventDefault();
@@ -48,6 +54,8 @@ export default function Contacto() {
                     v[1].nodeName !== 'INPUT'
                     &&
                     v[1].nodeName !== 'TEXTAREA'
+                    &&
+                    v[1].nodeName !== 'SELECT'
                 )
             ) return;
 
@@ -139,6 +147,20 @@ export default function Contacto() {
         }
     }
 
+    async function enviarManejadorRC(e) {
+        e.preventDefault();
+
+        if (!executeRecaptcha) {
+            console.log("Execute recaptcha not yet available");
+            return;
+        }
+
+        executeRecaptcha("enquiryFormSubmit").then((gReCaptchaToken) => {
+            console.log(gReCaptchaToken, "response Google reCaptcha server");
+            console.log('Enviar formulario');
+        });
+    }
+
     let render = '';
 
     if (enviado) {
@@ -152,11 +174,21 @@ export default function Contacto() {
     if (!enviado) {
         render = (
             <>
+
+                <h1>Buzón</h1>
+                <div className={style.textoInformativo}>
+                    <p>
+                        Si deseas mandar una felicitación, queja, reclamación o sugerencia,
+                        completa el siguiente cuestionario y te responderemos en un plazo máximo de 10 días lectivos.
+                        Ten en cuenta que no se admiten anónimos y que, si la cuenta de correo está mal escrita, no podremos responder.
+                        No se admitirán felicitaciones de los trabajadores del centro por razones obvias.
+                    </p>
+                </div>
                 <ErroresForm error={errores} />
                 <form ref={fc} name="formulariocontacto" className={style.fcontacto} action="/send-data-here" method="post">
-                    <label htmlFor="tipo">Tipo:</label>
-                    <select id="tipo" name="tipo">
-                        <option value="felicitacion" selected>Felicitación</option>
+                    <label htmlFor="mensaje">Mensaje de:</label>
+                    <select id="mensaje" name="mensaje" defaultValue={'felicitacion'}>
+                        <option value="felicitacion">Felicitación</option>
                         <option value="queja">Queja</option>
                         <option value="reclamacion">Reclamación</option>
                         <option value="sugerencia">Sugerencia</option>
@@ -169,7 +201,15 @@ export default function Contacto() {
                     <label htmlFor="apellidos">Apellidos:</label>
                     <input type="text" id="apellidos" placeholder="Apellidos" name="apellidos" required />
 
-                    <label htmlFor="email">Correo Electrónico:</label>
+                    <label htmlFor="perfil">Perfil:</label>
+                    <select id="perfil" name="perfil" placeholder="¿Quien envía?">
+                        <option value="alumnado">Alumnado</option>
+                        <option value="familia">Familia</option>
+                        <option value="personalcentro">Personal del Centro</option>
+                    </select>
+
+
+                    <label htmlFor="email">Correo electrónico:</label>
                     <input type="email" id="email" name="email" placeholder="Correco electrónico" pattern="^\w+([\.-\\+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required />
 
                     <label htmlFor="poblacion">Población:</label>
@@ -197,8 +237,11 @@ export default function Contacto() {
                     <label htmlFor="opinion">Opinión sobre nuestra página web:</label>
                     <textarea id="opinion" cols="40" rows="5" name="opinion" required minLength={10}></textarea>
 
+
+
                     <input type="submit" onClick={enviarManejador} value={deshabilitarEnvio ? 'Enviando...' : 'Enviar'} disabled={deshabilitarEnvio} />
                 </form>
+
             </>
 
         )

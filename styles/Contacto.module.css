@@ -42,12 +42,17 @@ CONTACTO
 }
 
 .fcontacto>input[type="submit"]:hover {
-  background: darkkhaki;
   cursor: pointer;
 }
 
 .fcontacto>textarea {
   min-height: 3em;
+}
+
+.textoInformativo {
+  width: 44em;
+  text-align: justify;
+  font-size: larger;
 }
 
 .erroresform {
