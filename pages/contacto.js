@@ -238,7 +238,7 @@ export default function Contacto() {
                     <label htmlFor="opinion">Opinión sobre nuestra página web:</label>
                     <textarea id="opinion" cols="40" rows="5" name="opinion" required minLength={10}></textarea>
 
-                    <input type="submit" onClick={enviarManejadorRC} value={deshabilitarEnvio ? 'Enviando...' : 'Enviar'} disabled={deshabilitarEnvio} />
+                    <input type="submit" onClick={enviarManejador} value={deshabilitarEnvio ? 'Enviando...' : 'Enviar'} disabled={deshabilitarEnvio} />
                 </form>
 
             </>
