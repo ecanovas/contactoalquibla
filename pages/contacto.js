@@ -4,7 +4,6 @@ import { useRef, useState } from 'react';
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 
-
 function ErroresForm(props) {
 
     if (props.error.length === 0) return '';
@@ -29,17 +28,18 @@ function ErroresForm(props) {
 export default function Contacto() {
     let fc = useRef({});
     const { executeRecaptcha } = useGoogleReCaptcha();
-    //console.log(executeRecaptcha);
+    console.log(executeRecaptcha);
+    console.log(process.env.NEXT_PUBLIC_RECAPTCHA_CLAVE_SITIO_WEB);
+    console.log(process.env.RECAPTCHA_CLAVE_SECRETA);
 
     const [errores, setErrores] = useState([]);
     const [deshabilitarEnvio, setDeshabilitarEnvio] = useState(false);
     const [enviado, setEnviado] = useState(false);
 
-
-
     async function enviarManejador(e) {
         e.preventDefault();
         setDeshabilitarEnvio(true);
+
         let datos = {};
         let erroresL = [];
 
@@ -117,6 +117,7 @@ export default function Contacto() {
         // comprobamos datos necesarios
         //        console.log(datos);
         //        console.log(erroresL);
+
 
         if (erroresL.length > 0) {
             setErrores(erroresL);
@@ -237,9 +238,7 @@ export default function Contacto() {
                     <label htmlFor="opinion">Opinión sobre nuestra página web:</label>
                     <textarea id="opinion" cols="40" rows="5" name="opinion" required minLength={10}></textarea>
 
-
-
-                    <input type="submit" onClick={enviarManejador} value={deshabilitarEnvio ? 'Enviando...' : 'Enviar'} disabled={deshabilitarEnvio} />
+                    <input type="submit" onClick={enviarManejadorRC} value={deshabilitarEnvio ? 'Enviando...' : 'Enviar'} disabled={deshabilitarEnvio} />
                 </form>
 
             </>
