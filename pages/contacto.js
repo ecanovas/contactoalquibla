@@ -187,28 +187,26 @@ export default function Contacto() {
                 </div>
                 <ErroresForm error={errores} />
                 <form ref={fc} name="formulariocontacto" className={style.fcontacto} action="/send-data-here" method="post">
-                    <label htmlFor="mensaje">Mensaje de:</label>
-                    <select id="mensaje" name="mensaje" defaultValue={'felicitacion'}>
-                        <option value="felicitacion">Felicitación</option>
-                        <option value="queja">Queja</option>
-                        <option value="reclamacion">Reclamación</option>
-                        <option value="sugerencia">Sugerencia</option>
-                    </select>
 
 
-                    <label htmlFor="nombre">Nombre:</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Nombre" required />
+                    <fieldset>
+                        <legend>Mensaje de:</legend>
+                        <input type="radio" id="mensaje1" name="mensaje" value="felicitacion" checked /><label htmlFor="mensaje1">Felicitación</label>
+                        <input type="radio" id="mensaje2" name="mensaje" value="queja" /><label htmlFor="mensaje2">Queja</label>
+                        <input type="radio" id="mensaje3" name="mensaje" value="reclamacion" /><label htmlFor="mensaje3">Reclamación</label>
+                        <input type="radio" id="mensaje4" name="mensaje" value="sugerencia" /><label htmlFor="mensaje4">Sugerencia</label>
+                    </fieldset>
 
-                    <label htmlFor="apellidos">Apellidos:</label>
-                    <input type="text" id="apellidos" placeholder="Apellidos" name="apellidos" required />
 
-                    <label htmlFor="perfil">Perfil:</label>
-                    <select id="perfil" name="perfil" placeholder="¿Quien envía?">
-                        <option value="alumnado">Alumnado</option>
-                        <option value="familia">Familia</option>
-                        <option value="personalcentro">Personal del Centro</option>
-                    </select>
+                    <label htmlFor="nombre">Nombre completo:</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre y Apellidos" required />
 
+                    <fieldset>
+                        <legend>Perfil:</legend>
+                        <input type="radio" id="perfil1" name="perfil" value="alumnado" checked /><label htmlFor="perfil1">Alumnado</label>
+                        <input type="radio" id="perfil2" name="perfil" value="familia" /><label htmlFor="perfil2">Familia</label>
+                        <input type="radio" id="perfil3" name="perfil" value="personalcentro" /><label htmlFor="perfil3">Personal de Centro</label>
+                    </fieldset>
 
                     <label htmlFor="email">Correo electrónico:</label>
                     <input type="email" id="email" name="email" placeholder="Correco electrónico" pattern="^\w+([\.-\\+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required />
@@ -219,23 +217,8 @@ export default function Contacto() {
                     <label htmlFor="provincia">Provincia:</label>
                     <input type="text" id="provincia" name="provincia" placeholder="Provincia" />
 
-                    <fieldset>
-                        <legend>Edad:</legend>
-                        <input type="radio" id="edad1" name="edad" value="0-20" /><label htmlFor="edad1">0-20</label>
-                        <input type="radio" id="edad2" name="edad" value="21-40" /><label htmlFor="edad2">21-40</label>
-                        <input type="radio" id="edad3" name="edad" value="41-60" /><label htmlFor="edad3">41-60</label>
-                        <input type="radio" id="edad4" name="edad" value="61-" /><label htmlFor="edad4">61-</label>
-                    </fieldset>
 
-                    <fieldset >
-                        <legend>¿Cómo nos conociste?</legend>
-                        <input type="checkbox" id="conocer-amigo" name="amigo" value="S" /><label htmlFor="edad1">A través de un amigo</label>
-                        <input type="checkbox" id="conocer-buscador" name="buscador" value="S" /><label htmlFor="edad2">A través de un buscador</label>
-                        <input type="checkbox" id="conocer-red" name="red" value="S" /><label htmlFor="edad3">Navegando por la red</label>
-                        <input type="checkbox" id="conocer-otros" name="otros" value="S" /><label htmlFor="edad4">Otros</label>
-                    </fieldset>
-
-                    <label htmlFor="opinion">Opinión sobre nuestra página web:</label>
+                    <label htmlFor="opinion" className={style.comentario}>Comentario:</label>
                     <textarea id="opinion" cols="40" rows="5" name="opinion" required minLength={10}></textarea>
 
                     <input type="submit" onClick={enviarManejador} value={deshabilitarEnvio ? 'Enviando...' : 'Enviar'} disabled={deshabilitarEnvio} />

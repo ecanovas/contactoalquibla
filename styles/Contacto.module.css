@@ -49,6 +49,11 @@ CONTACTO
   min-height: 3em;
 }
 
+.comentario {
+  font-size:larger;
+  font-weight: bolder;
+}
+
 .textoInformativo {
   width: 44em;
   text-align: justify;
