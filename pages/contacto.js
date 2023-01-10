@@ -29,8 +29,8 @@ export default function Contacto() {
     let fc = useRef({});
     const { executeRecaptcha } = useGoogleReCaptcha();
     console.log(executeRecaptcha);
-    console.log(process.env.NEXT_PUBLIC_RECAPTCHA_CLAVE_SITIO_WEB);
-    console.log(process.env.RECAPTCHA_CLAVE_SECRETA);
+//    console.log(process.env.NEXT_PUBLIC_RECAPTCHA_CLAVE_SITIO_WEB);
+//    console.log(process.env.RECAPTCHA_CLAVE_SECRETA);
 
     const [errores, setErrores] = useState([]);
     const [deshabilitarEnvio, setDeshabilitarEnvio] = useState(false);
@@ -191,7 +191,7 @@ export default function Contacto() {
 
                     <fieldset>
                         <legend>Mensaje de:</legend>
-                        <input type="radio" id="mensaje1" name="mensaje" value="felicitacion" checked /><label htmlFor="mensaje1">Felicitación</label>
+                        <input type="radio" id="mensaje1" name="mensaje" value="felicitacion" defaultChecked={'felicitacion'} /><label htmlFor="mensaje1">Felicitación</label>
                         <input type="radio" id="mensaje2" name="mensaje" value="queja" /><label htmlFor="mensaje2">Queja</label>
                         <input type="radio" id="mensaje3" name="mensaje" value="reclamacion" /><label htmlFor="mensaje3">Reclamación</label>
                         <input type="radio" id="mensaje4" name="mensaje" value="sugerencia" /><label htmlFor="mensaje4">Sugerencia</label>
@@ -203,9 +203,10 @@ export default function Contacto() {
 
                     <fieldset>
                         <legend>Perfil:</legend>
-                        <input type="radio" id="perfil1" name="perfil" value="alumnado" checked /><label htmlFor="perfil1">Alumnado</label>
+                        <input type="radio" id="perfil1" name="perfil" value="alumnado" defaultChecked={'alumnado'} /><label htmlFor="perfil1">Alumnado</label>
                         <input type="radio" id="perfil2" name="perfil" value="familia" /><label htmlFor="perfil2">Familia</label>
                         <input type="radio" id="perfil3" name="perfil" value="personalcentro" /><label htmlFor="perfil3">Personal de Centro</label>
+                        <input type="radio" id="perfil4" name="perfil" value="otro" /><label htmlFor="perfil4">Otro</label>
                     </fieldset>
 
                     <label htmlFor="email">Correo electrónico:</label>

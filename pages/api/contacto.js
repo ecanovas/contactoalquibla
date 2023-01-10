@@ -4,7 +4,7 @@ import * as nodemailer from 'nodemailer';
 
 export default async function fun(req, res) {
 
-    const { nombre, apellidos, email, poblacion, conocer, edad, opinion, provincia, perfil, mensaje } = req.body;
+    const { nombre, email, poblacion, opinion, provincia, perfil, mensaje } = req.body;
 
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
@@ -28,30 +28,20 @@ export default async function fun(req, res) {
         'alumnado': 'Alumnado'
         ,'familia': 'Familia'
         ,'personalcentro': 'Personal de Centro'
-        ,'sugerencia': 'Sugerencia'
+        ,'otro': 'Otro'
     };
 
-    let conocerTxt =conocer.join(', ');
-    if (conocerTxt==='')
-        conocerTxt = 'Sin especificar';
-
-    let edadTxt = edad||'Sin especificar';
 
     let texto = `
         MENSAJE: ${mensajeTxt[mensaje]}
         NOMBRE: ${nombre}
-        APELLIDOS: ${apellidos}
         PERFIL: ${perfilTxt[perfil]}        
         POBLACIÓN: ${poblacion}
         PROVINCIA: ${provincia}
-        CONOCER: ${conocerTxt}
-        EDAD: ${edadTxt}
         OPINION: ${opinion}
     `;
 
     let nom = [];
-    if (apellidos.trim()!=='')
-        nom.push(apellidos.trim());
 
     if (nombre.trim()!=='')
         nom.push(nombre.trim());
@@ -63,7 +53,7 @@ export default async function fun(req, res) {
     let asunto = `${mensajeTxt[mensaje]}${sujeto} (${perfilTxt[perfil]}) - Buzón de sugerencias WEB`;
 
     let info = await transporter.sendMail({
-        from: `${nombre} ${apellidos} <${email}>`, //'"Fred Foo " <foo@example.com>', // sender address
+        from: `${nombre} <${email}>`, //'"Fred Foo " <foo@example.com>', // sender address
         to: process.env.MAIL_TO, // list of receivers
         subject: asunto, // Subject line
         text: texto, // plain text body
