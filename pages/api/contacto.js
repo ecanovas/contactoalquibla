@@ -29,7 +29,7 @@ export default async function fun(req, res) {
 
     let info = await transporter.sendMail({
         from: `${nombre} ${apellidos} <${email}>`, //'"Fred Foo " <foo@example.com>', // sender address
-        to: "ernesto.canovas@gmail.com", // list of receivers
+        to: process.env.MAIL_TO, // list of receivers
         subject: "Formulario Contacto - WEB", // Subject line
         text: texto, // plain text body
         //        html: JSON.stringify(req.body), // html body

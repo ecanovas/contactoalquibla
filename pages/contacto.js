@@ -107,8 +107,8 @@ export default function Contacto() {
         // comprobaciones adicionales
 
         // comprobamos datos necesarios
-//        console.log(datos);
-//        console.log(erroresL);
+        //        console.log(datos);
+        //        console.log(erroresL);
 
         if (erroresL.length > 0) {
             setErrores(erroresL);
@@ -141,8 +141,7 @@ export default function Contacto() {
 
     let render = '';
 
-    if (enviado)
-    {
+    if (enviado) {
         render = (
             <div>
                 Mensaje enviado correctamente !!!!
@@ -155,6 +154,15 @@ export default function Contacto() {
             <>
                 <ErroresForm error={errores} />
                 <form ref={fc} name="formulariocontacto" className={style.fcontacto} action="/send-data-here" method="post">
+                    <label htmlFor="tipo">Tipo:</label>
+                    <select id="tipo" name="tipo">
+                        <option value="felicitacion" selected>Felicitación</option>
+                        <option value="queja">Queja</option>
+                        <option value="reclamacion">Reclamación</option>
+                        <option value="sugerencia">Sugerencia</option>
+                    </select>
+
+
                     <label htmlFor="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" placeholder="Nombre" required />
 
@@ -187,7 +195,7 @@ export default function Contacto() {
                     </fieldset>
 
                     <label htmlFor="opinion">Opinión sobre nuestra página web:</label>
-                    <textarea id="opinion" cols="40" rows="5" name="opinion" required minLength={50}></textarea>
+                    <textarea id="opinion" cols="40" rows="5" name="opinion" required minLength={10}></textarea>
 
                     <input type="submit" onClick={enviarManejador} value={deshabilitarEnvio ? 'Enviando...' : 'Enviar'} disabled={deshabilitarEnvio} />
                 </form>
