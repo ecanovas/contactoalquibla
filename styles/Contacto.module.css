@@ -13,7 +13,7 @@ CONTACTO
   grid-gap: .8em .5em;
   background: beige;
   padding: 1.2em;
-  width: 36em;
+  width: 26em;
 }
 
 .fcontacto>label,
@@ -55,7 +55,7 @@ CONTACTO
 }
 
 .textoInformativo {
-  width: 44em;
+  width: 33em;
   text-align: justify;
   font-size: larger;
 }
