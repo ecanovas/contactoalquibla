@@ -210,7 +210,7 @@ export default function Contacto() {
                     </fieldset>
 
                     <label htmlFor="email">Correo electrónico:</label>
-                    <input type="email" id="email" name="email" placeholder="Correco electrónico" pattern="^\w+([\.-\\+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required />
+                    <input type="email" id="email" name="email" placeholder="Correo electrónico" pattern="^\w+([\.-\\+]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required />
 
                     <label htmlFor="poblacion">Población:</label>
                     <input type="text" id="poblacion" name="poblacion" placeholder="Población" />

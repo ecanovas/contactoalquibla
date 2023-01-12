@@ -34,6 +34,7 @@ export default async function fun(req, res) {
 
     let texto = `
         MENSAJE: ${mensajeTxt[mensaje]}
+        CORREO: ${email}
         NOMBRE: ${nombre}
         PERFIL: ${perfilTxt[perfil]}        
         POBLACIÓN: ${poblacion}
@@ -53,6 +54,7 @@ export default async function fun(req, res) {
     let asunto = `${mensajeTxt[mensaje]}${sujeto} (${perfilTxt[perfil]}) - Buzón de sugerencias WEB`;
 
     let info = await transporter.sendMail({
+        replyTo: `${email}`,
         from: `${nombre} <${email}>`, //'"Fred Foo " <foo@example.com>', // sender address
         to: process.env.MAIL_TO, // list of receivers
         subject: asunto, // Subject line
